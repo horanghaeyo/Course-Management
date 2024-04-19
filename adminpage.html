@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Scheduler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        input[type="text"], input[type="time"], input[type="submit"] {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .course-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            margin-bottom: 10px;
+        }
+        .course-item:last-child {
+            border-bottom: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Course Scheduler</h1>
+    <form id="course-form" action="adminpage.html" method="post" onsubmit="return validate1();">
+        <input type="text" id="course-name" placeholder="Course Name" required>
+        <input type="time" id="course-time" required>
+        <input type="submit" value="Add Course">
+    </form>
+    
+    <h1>Delete a course</h1>
+    <form id="delete-form" action="adminpage.html" method="post" onsubmit="return validate2();">
+        <input type="text" id="delete-name" placeholder="Course Name" required>
+        <input type="submit" value="Delete Course">
+    </form>
+
+    <h1>Edit a course</h1>
+    <form id="edit-form" action="adminpage.html" method="post" onsubmit="return validate3();">
+        <input type="text" id="edit-name" placeholder="Course Name" required>
+        <input type="text" id="new-name" placeholder="New Course" required>
+        <input type="time" id="new-time" required>
+        <input type="submit" value="Edit Course">
+    </form>
+
+    <div>
+        <h1>List of courses</h1>
+        <ol id="list">
+
+        </ol>
+    </div>
+
+    <script>
+        function validate1() {
+            const courseName = document.getElementById('course-name').value;
+            const courseTime = document.getElementById('course-time').value;
+            const courses = document.getElementById('list');
+            const courseItem = document.createElement("li");
+            courseItem.innerHTML = "Course: " + courseName + " and Time: " + courseTime;
+            courseItem.id = courseName;
+            courses.appendChild(courseItem);
+            document.getElementById('course-form').reset();
+            return false;
+        };
+
+        function validate2() {
+            const deleteName = document.getElementById('delete-name').value;
+            document.getElementById(deleteName).remove();
+            document.getElementById('delete-form').reset();
+            return false;
+        };
+
+        function validate3() {
+        
+            const edittname = document.getElementById('new-name').value;
+            const editttime = document.getElementById('new-time').value;
+            const editn=document.getElementById('edit-name').value;
+            document.getElementById(editn).innerHTML="Course: " + edittname + " and Time: " + editttime;
+    
+            document.getElementById('edit-form').reset();
+            return false;
+        };
+        
+
+    </script>
+</body>
+</html>

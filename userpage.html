@@ -1,0 +1,215 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .course-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            margin-bottom: 10px;
+        }
+        .course-item:last-child {
+            border-bottom: none;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            height:50px;
+            width:100px;
+            margin:10px;
+        }
+        button:hover{
+            background-color: darkblue;
+        }
+        .history {
+            margin-top: 20px;
+        }
+        .history h2 {
+            margin-bottom: 10px;
+        }
+        .history-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            margin-bottom: 10px;
+        }
+        .history-item:last-child {
+            border-bottom: none;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to User Page</h1>
+
+        <h2>Available Courses</h2>
+        <div id="course-list">
+            <form id="course-form" action="userpage.html" method="post" onsubmit="return validate();">
+                <button class="but" id="toc" onclick="changecolor('toc')">Select</button><label>Theory of Computation</label><br>
+                <button class="but" id="cao" onclick="changecolor('cao')">Select</button><label>Computer Organization And Architecture</label><br>
+                <button class="but" id="mpmc" onclick="changecolor('mpmc')">Select</button><label>Microprocessors And Microcontrollers</label><br>
+                <button class="but" id="ss" onclick="changecolor('ss')">Select</button><label>Soft Skills</label><br>
+                <button class="but" id="web" onclick="changecolor('web')">Select</button><label>Web Programming</label><br>
+                <input type="submit" value="Register">
+
+            </form>
+        </div>
+        <div>
+            <h2>List of courses</h2>
+            <ol id="list">
+    
+            </ol>
+        </div>
+
+        
+    </div>
+
+    <script>
+        function validate(){
+            const
+            document.getElementById('course-form').reset();
+            return false;
+        }
+        function changecolor(a){
+            document.getElementById(a).style.backgroundColor='yellow';
+            return false;
+
+        }
+       
+    </script>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .course-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            margin-bottom: 10px;
+        }
+        .course-item:last-child {
+            border-bottom: none;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+            height:200px;
+            width:50px;
+        }
+        
+        label {
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to User Page</h1>
+
+        <h2>Available Courses</h2>
+        
+            <form id="course-form" action="userpage.html" method="post" onsubmit="return validate();">
+                
+                <input type="checkbox" class="but" id="toc" onclick="wri('toc')"><label class="toc">Theory of Computation</label><br>
+                <input type="checkbox" class="but" id="cao" onclick="wri('cao')"><label class="cao">Computer Organization And Architecture</label><br>
+                <input type="checkbox" class="but" id="mpmc" onclick="wri('mpmc')"><label class="mpmc">Microprocessors And Microcontrollers</label><br>
+                <input type="checkbox" class="but" id="ss" onclick="wri('ss')"><label class="ss">Soft Skills</label><br>
+                <input type="checkbox" class="but" id="web" onclick="wri('web')"><label for="web">Web Programming</label><br>
+                <input type="submit" value="Register">
+                <input type="reset" value="reset" onclick="erase()">
+            </form>
+        
+        <div>
+            <h2>List of Selected Courses</h2>
+            <ol id="selected-courses">
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function wri(a){
+            document.getElementById(a).style.color="yellow";
+        }
+        function erase(){
+            var listItems = document.getElementsByTagName("li"); // Select all <li> elements
+                for (var i = 0; i < listItems.length; i++) {
+                    listItems[i].remove(); // Remove each <li> element
+        }        }
+/*
+        function validate() {
+            const checkbox = document.getElementsByClassName('but');
+            if (checkbox.checked) {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = document.getElementsByClassName(checkbox.id).textContent;
+                document.getElementById("selected-courses").appendChild(listItem)
+            }
+            return false;
+        }*/
+        function validate() {
+            const checkboxes = document.querySelectorAll('.but');
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = document.querySelector('.'+ checkbox.id).textContent;
+                    document.getElementById("selected-courses").appendChild(listItem);
+                }
+            });
+
+    return false;
+}
+
+
+        /*function validate() {
+            // Prevent form submission
+            event.preventDefault();
+            
+            // Display selected courses in the list
+            var selectedCourseNames = Object.keys(selectedCourses);
+            var selectedCoursesList = document.getElementById("selected-courses");
+            selectedCoursesList.innerHTML = '';
+            selectedCourseNames.forEach(function(courseId) {
+                var courseName = document.querySelector("label[for='" + courseId + "']").textContent;
+                var listItem = document.createElement("li");
+                listItem.textContent = courseName;
+                selectedCoursesList.appendChild(listItem);
+            });
+        }*/
+    </script>
+</body>
+</html>
